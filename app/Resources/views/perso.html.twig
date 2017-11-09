@@ -1,0 +1,55 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    {% for perso in persos %}
+        <div class="col-md-12 col-xs-12 text-center">
+
+            <div class="col-md-12">
+                <span class="page-item"><a class="page-link" href="{{ perso.id - 1 }}"> << Previous >>  </a></span>
+                <strong class="col-md-12">{{ perso.name }}</strong>
+                <span class="page-item"><a class="page-link" href="{{ perso.id + 1 }}"> << Next >> </a></span>
+            </div>
+
+            <div class="row col-md-12">
+            {% if perso.description == '' %}
+                <strong>Description:</strong> Ce personnage n'a pas de description
+            {% else %}
+                <strong>Description:</strong> {{ perso.description }}
+            {% endif %}
+            </div>
+
+            <div class="row col-md-12">
+                <img class="img-rounded" src="{{ perso.thumbnail.path }}.{{ perso.thumbnail.extension }}" width="275" height="275">
+            </div>
+
+            <div class="row col-md-12">
+                <strong>Nombre de comics ou apparait {{ perso.name }} :</strong>
+                 {% if perso.comics.available == '' %}
+                    Aucun
+                {% else %}
+                    {{ perso.comics.available }}
+                {% endif %}
+            </div>
+
+            <div class="row col-md-12">
+                <strong>Noms des 3 premiers comics ou l'on peut retrouver {{ perso.name }}:</strong>
+
+                {% if perso.comics.returned == 0 %}
+                    <ul>
+                        Ce pesonnage n'apparaît dans aucun comic pour le moment
+                    </ul>
+                {% else %}
+                    {% for comic in perso.comics.items|slice(0, 3) %}
+                        <ul>
+                            <li>{{comic.name}}</li>
+                        </ul>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    <div class="row">
+        <a class="col-md-12 text-center" href="{{ path('marvelHome') }}">Retour à la page d'accueil</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    {% for key,resultat in resultats %}
+        <div class="row col-md-3">
+            <div class="text-center">
+                <a href="marvel/{{ resultat.id }}">{{ resultat.name }}</a>
+            </div>
+            <div class="text-center">
+                <a href="marvel/{{ resultat.id }}"><img class="img-circle" src="{{ resultat.thumbnail.path }}.{{ resultat.thumbnail.extension }}" width="200" height="200"></a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+
+    </script>
+{% endblock %}
+
