@@ -18,7 +18,7 @@ use GuzzleHttp\Client;
  * @package AppBundle\Utils
  *
  */
-class apiConnect {
+class ApiConnect {
 
     private $url;
     private $privateKey;

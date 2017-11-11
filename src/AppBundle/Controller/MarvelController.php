@@ -8,7 +8,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Utils\apiConnect;
+use AppBundle\Utils\ApiConnect;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -20,12 +20,12 @@ class MarvelController extends Controller
      * @Route("/marvel", name="marvelHome")
      *
      */
-    public function connectAction()
+    public function listePersoAction()
     {
-        $newClient = new apiConnect(
+        $newClient = new ApiConnect(
             'https://gateway.marvel.com/v1/public/characters',
-            'Your privateKey',
-            'Your publicKey'
+            $this->getParameter( 'publickey'),
+            $this->getParameter( 'privatekey')
         );
 
         $data = $newClient->connection( 20, 100, 'name' );
@@ -37,22 +37,22 @@ class MarvelController extends Controller
 
     /**
      * Specific Route to see details of one character
-     * @Route("/marvel/{id}", name="marvel_perso")
+     * @Route("/marvel/{id}", name="marvel_perso", requirements={"id": "\d+"})
      *
      */
 
     public function fichePersoAction(int $id)
     {
-        $newClient = new apiConnect(
+        $newClient = new ApiConnect(
             'https://gateway.marvel.com/v1/public/characters/'.$id,
-            'Your privateKey',
-            'Your publicKey'
+            $this->getParameter( 'publickey'),
+            $this->getParameter( 'privatekey')
         );
 
         $data = $newClient->connection( 20, 100, 'name' );
 
         return $this->render('perso.html.twig', [
-            'persos' => json_decode($data)->data->results
+            'persos' => json_decode( $data )->data->results
         ]);
     }
 

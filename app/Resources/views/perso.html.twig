@@ -4,13 +4,13 @@
     {% for perso in persos %}
         <div class="col-md-12 col-xs-12 text-center">
 
-            <div class="col-md-12">
+            <div class="col-md-12 col-xs-12">
                 <span class="page-item"><a class="page-link" href="{{ perso.id - 1 }}"> << Previous >>  </a></span>
-                <strong class="col-md-12">{{ perso.name }}</strong>
+                <strong class="col-md-12 col-xs-12">{{ perso.name }}</strong>
                 <span class="page-item"><a class="page-link" href="{{ perso.id + 1 }}"> << Next >> </a></span>
             </div>
 
-            <div class="row col-md-12">
+            <div class="row col-md-12 col-xs-12">
             {% if perso.description == '' %}
                 <strong>Description:</strong> Ce personnage n'a pas de description
             {% else %}
@@ -18,11 +18,11 @@
             {% endif %}
             </div>
 
-            <div class="row col-md-12">
-                <img class="img-rounded" src="{{ perso.thumbnail.path }}.{{ perso.thumbnail.extension }}" width="275" height="275">
+            <div class="row col-md-12 col-xs-12">
+                <img class="img-rounded" src="{{ perso.thumbnail.path }}.{{ perso.thumbnail.extension }}" width="200" height="200">
             </div>
 
-            <div class="row col-md-12">
+            <div class="row col-md-12 col-xs-12">
                 <strong>Nombre de comics ou apparait {{ perso.name }} :</strong>
                  {% if perso.comics.available == '' %}
                     Aucun
@@ -31,7 +31,7 @@
                 {% endif %}
             </div>
 
-            <div class="row col-md-12">
+            <div class="row col-md-12 col-xs-12">
                 <strong>Noms des 3 premiers comics ou l'on peut retrouver {{ perso.name }}:</strong>
 
                 {% if perso.comics.returned == 0 %}
@@ -50,6 +50,8 @@
         {% endfor %}
 
     <div class="row">
-        <a class="col-md-12 text-center" href="{{ path('marvelHome') }}">Retour à la page d'accueil</a>
+        <a class="col-md-12 col-xs-12 text-center" href="{{ path('marvelHome') }}">Retour à la page d'accueil</a>
     </div>
 {% endblock %}
+
+{#{{ persos }}#}
